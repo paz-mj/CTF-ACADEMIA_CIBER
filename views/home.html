@@ -16,28 +16,9 @@
       <p>En cada nivel te vamos a explicar, paso a paso, una tecnica basica que usan quienes trabajan en ciberseguridad: revisar el codigo fuente, explorar rutas, leer la consola del navegador, inspeccionar cookies y ver cabeceras HTTP.</p>
       <p>No todo lo importante esta a la vista. Presta atencion a los detalles.</p>
       <p>Mucha suerte para todos y que empiece el juego!</p>
-      <p>Comienza en: <a href="/nivel1/">/nivel1/</a></p>
     </div>
 
-    <div class="box">
-      <h2>Control de progreso</h2>
-      <p>Si te bloqueaste o quieres repetir el laboratorio, reinicia el avance:</p>
-      <form method="POST" action="/reiniciar" class="actions">
-        <button class="btn" type="submit">Reiniciar progreso</button>
-      </form>
-    </div>
+    <!--CONTENT-->
   </main>
-
-  <script>
-    (function () {
-      const params = new URLSearchParams(window.location.search);
-      if (!params.get('final')) return;
-
-      const card = document.createElement('div');
-      card.className = 'box';
-      card.innerHTML = '<h2>Mision completada</h2><p class="flag">Completaste los 5 niveles del CTF introductorio.</p><p>Excelente trabajo. Ya puedes repetir el recorrido o usarlo en clase.</p>';
-      document.querySelector('.container').appendChild(card);
-    })();
-  </script>
 </body>
 </html>

@@ -25,11 +25,14 @@ http://localhost:3000
 
 ## 2) Flujo general del CTF
 
-- El alumno empieza en la pagina principal.
+- El alumno entra a la pagina principal y se registra con un nombre o apodo (formulario simple, sin contraseña).
+- Al registrarse arranca su cronometro personal y queda guardado en una cookie (no puede acceder a ningun nivel sin registrarse primero).
 - Debe resolver los niveles en orden.
 - Cada nivel tiene un formulario para validar su flag.
 - El servidor guarda progreso en cookie firmada y desbloquea el siguiente nivel.
 - Si intentan saltar cambiando URL, el servidor responde Acceso bloqueado (403).
+- Al validar la flag del nivel 5, se registra su tiempo de termino y se le redirige a la tabla de posiciones (/ranking).
+- Cualquiera puede ver la tabla de posiciones en /ranking en cualquier momento (util para proyectarla en la sala).
 
 ## 3) Que ensena cada nivel
 
@@ -161,8 +164,17 @@ Flag final:
 - El bloqueo por nivel se hace en servidor para evitar bypass simple por URL.
 - El progreso se guarda en cookie firmada para evitar manipulacion trivial.
 - La cookie `pista_nivel4` y la cabecera `X-Academia-Flag` son parte intencional del acertijo de esos niveles, no son datos sensibles reales.
+- La tabla de posiciones se guarda en memoria (no en una base de datos): si el servidor se reinicia durante la clase, se pierde. Para una sesion corta de un dia es suficiente.
+- Los nombres se identifican por navegador (cookie), no hay contraseña. Si dos alumnos usan el mismo nombre, van a aparecer como dos filas distintas en la tabla.
 
-## 6) Sugerencia para clase
+## 6) Ayuda automatica y tabla de posiciones
+
+- Cada nivel tiene una ayuda paso a paso escondida detras de un boton ("Mostrar ayuda paso a paso"). Si el alumno lleva 5 minutos o mas en el mismo nivel sin resolverlo, esa ayuda se despliega sola (control por navegador, usando localStorage, no requiere nada del servidor).
+- Si un alumno recarga la pagina antes de los 5 minutos, el cronometro de la ayuda no se reinicia: sigue contando desde que entro por primera vez a ese nivel.
+- La tabla de posiciones (/ranking) muestra solo a quienes ya completaron el nivel 5, ordenados del mas rapido al mas lento, calculando el tiempo desde que cada uno se registro hasta que valido la flag final.
+- El boton "Reiniciar progreso" en la pagina principal borra por completo el registro del alumno (nombre, progreso y tiempo), asi puede volver a intentarlo desde cero si es necesario.
+
+## 7) Sugerencia para clase
 
 Secuencia recomendada (CTF cortito, pensado para una sesion de introduccion):
 

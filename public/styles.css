@@ -116,6 +116,39 @@ a:hover {
   padding: 0 12px 12px;
 }
 
+.mini-tip-auto {
+  border-left-color: var(--cyan);
+  box-shadow: 0 0 0 1px rgba(50, 246, 255, 0.25);
+}
+
+.mini-tip-auto summary::before {
+  color: var(--cyan);
+}
+
+.ranking {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ranking th,
+.ranking td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ranking th {
+  color: var(--cyan);
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+}
+
+.ranking tr.me td {
+  color: var(--lime);
+  font-weight: bold;
+}
+
 .unlock {
   display: grid;
   gap: 10px;

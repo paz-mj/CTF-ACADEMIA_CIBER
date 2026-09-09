@@ -1,6 +1,8 @@
-# Write-up Mini CTF Academia
+# Write-up CTF Introductorio - Academia de Ciberseguridad UCN
 
 Este documento resume como correr, jugar y explicar el laboratorio CTF web de 5 niveles.
+
+Publico objetivo: alumnos totalmente nuevos en ciberseguridad, sin experiencia tecnica previa. El objetivo no es "hackear" nada de verdad, sino perder el miedo a las herramientas de desarrollador del navegador y entender un puñado de conceptos basicos mediante acertijos cortos.
 
 ## 1) Como levantar el laboratorio
 
@@ -29,155 +31,147 @@ http://localhost:3000
 - El servidor guarda progreso en cookie firmada y desbloquea el siguiente nivel.
 - Si intentan saltar cambiando URL, el servidor responde Acceso bloqueado (403).
 
-## 3) Resolucion por niveles
+## 3) Que ensena cada nivel
 
-### Nivel 1 - Leer con atencion
+| Nivel | Tecnica | Herramienta del navegador |
+|---|---|---|
+| 1 | Ver codigo fuente de una pagina | Ctrl+U / "Ver codigo fuente" |
+| 2 | Explorar subdirectorios editando la URL | Barra de direcciones |
+| 3 | Leer la consola y decodificar Base64 | DevTools > Console |
+| 4 | Inspeccionar cookies del sitio | DevTools > Application/Almacenamiento |
+| 5 | Revisar cabeceras HTTP de la respuesta | DevTools > Network |
+
+## 4) Resolucion por niveles
+
+### Nivel 1 - Lo que no se ve a simple vista
 
 Ruta:
 
 - /nivel1/
 
-Pista visible:
+Concepto a explicar en clase:
 
-- El secreto puede no estar en la pagina.
-
-Pista escondida:
-
-- Comentario HTML sugiere buscar archivo en el mismo directorio.
+- Toda pagina web es, en el fondo, un archivo de texto (HTML) que el navegador interpreta.
+- Se puede ver ese texto completo aunque no se muestre todo en pantalla.
 
 Resolucion:
 
-1. Abrir /nivel1/pista.txt
-2. Copiar flag encontrada.
-3. Validarla en el formulario del nivel 1.
+1. Clic derecho sobre la pagina > "Ver codigo fuente de la pagina" (o Ctrl+U).
+2. Buscar con Ctrl+F la palabra ACADEMIA dentro del codigo.
+3. La flag esta dentro de un comentario HTML (`<!-- ... -->`).
 
 Flag:
 
-- ACADEMIA{miraste_mas_alla}
+- ACADEMIA{el_codigo_fuente_no_miente}
 
-### Nivel 2 - Ruta escondida
+### Nivel 2 - No todas las puertas tienen cartel
 
 Ruta:
 
 - /nivel2/
 
-Pista visible:
+Concepto a explicar en clase:
 
-- Pensar en nombres clasicos de carpetas ocultas.
-
-Pista escondida:
-
-- Comentario HTML sugiere /nivel2/oculto/
+- Una web vive en carpetas y subcarpetas dentro del servidor.
+- No todas las rutas tienen un link visible: algunas solo se llega a ellas escribiendo la direccion.
 
 Resolucion:
 
-1. Abrir /nivel2/oculto/clave.txt
-2. Copiar flag.
-3. Validarla en el formulario del nivel 2.
+1. En la barra de direcciones, agregar al final de la URL el nombre de una carpeta "escondida" clasica.
+2. Llegar a /nivel2/oculto/clave.txt
+3. Copiar la flag.
 
 Flag:
 
 - ACADEMIA{las_rutas_tambien_hablan}
 
-### Nivel 3 - Mensaje codificado
+### Nivel 3 - El codigo susurra
 
 Ruta:
 
 - /nivel3/
 
-Pista visible:
+Concepto a explicar en clase:
 
-- Revisar scripts y consola del navegador.
-
-Pista escondida:
-
-- En codigo.js hay un Base64.
+- La consola del navegador (DevTools > Console) muestra mensajes que los sitios imprimen, normalmente solo utiles para quien programa.
+- Base64 no es un cifrado: es solo una forma de representar texto. Se puede decodificar con `atob()` en la misma consola o con cualquier decodificador online.
 
 Resolucion:
 
-1. Abrir /nivel3/codigo.js o consola del navegador.
-2. Decodificar:
+1. Abrir la consola del navegador (F12).
+2. Recargar la pagina y leer el mensaje impreso.
+3. Decodificar:
 
+```
 RmxhZzogQUNBREVNSUF7ZWxfY29kaWdvX3RhbWJpZW5fZXNfcGlzdGF9
+```
 
-3. Resultado:
+4. Resultado:
 
 Flag: ACADEMIA{el_codigo_tambien_es_pista}
 
-4. Validar en formulario del nivel 3.
-
-### Nivel 4 - Unir fragmentos
+### Nivel 4 - Una galletita con secretos
 
 Ruta:
 
 - /nivel4/
 
-Pista visible:
+Concepto a explicar en clase:
 
-- Primer fragmento en la pagina: ACADEMIA{une_
-
-Pista escondida:
-
-- Comentario HTML sugiere /nivel4/recursos/fragmento.txt
+- Las cookies son datos que el servidor guarda en el navegador del visitante (por ejemplo, para recordar el progreso del propio CTF).
+- Se pueden inspeccionar desde DevTools sin instalar nada extra.
 
 Resolucion:
 
-1. Abrir /nivel4/recursos/fragmento.txt
-2. Unir:
+1. Abrir DevTools (F12) > pestana Application (Chrome/Edge) o Almacenamiento (Firefox).
+2. Ir a Cookies > seleccionar el sitio.
+3. Buscar la cookie `pista_nivel4` y copiar su valor.
+4. Decodificar ese valor en Base64 (por ejemplo con `atob('...')` en la consola).
 
-ACADEMIA{une_ + fragmentos_y_gana}
+Flag:
 
-3. Flag completa:
+- ACADEMIA{las_cookies_guardan_secretos}
 
-ACADEMIA{une_fragmentos_y_gana}
-
-4. Validar en formulario del nivel 4.
-
-### Nivel 5 - Cierre final
+### Nivel 5 - La ultima llave viaja escondida
 
 Ruta:
 
 - /nivel5/
 
-Pista visible:
+Concepto a explicar en clase:
 
-- Donde suelen terminar las historias.
+- Cada respuesta HTTP trae, ademas del contenido visible, cabeceras (headers) con informacion adicional.
+- Esas cabeceras se ven en DevTools > Network, seleccionando la peticion del documento.
 
 Resolucion:
 
-1. Abrir /nivel5/final.txt
-2. Copiar la flag final.
-3. Validar en formulario del nivel 5.
+1. Abrir DevTools (F12) > pestana Network.
+2. Recargar la pagina con esa pestana abierta.
+3. Hacer clic en la primera peticion (el documento HTML).
+4. Buscar en Response Headers la cabecera `X-Academia-Flag`.
 
 Flag final:
 
-- ACADEMIA{ctf_completado}
-
-## 4) Que se aprende en cada nivel
-
-- Nivel 1: observacion y lectura de estructura.
-- Nivel 2: deduccion de rutas y exploracion de directorios.
-- Nivel 3: analisis de scripts y decodificacion basica.
-- Nivel 4: correlacion de pistas y reconstruccion de datos.
-- Nivel 5: interpretacion de acertijos y cierre del flujo.
+- ACADEMIA{la_respuesta_viaja_escondida}
 
 ## 5) Nota tecnica de seguridad del laboratorio
 
 - Este CTF es educativo y local.
-- No busca simular un entorno real ofensivo.
+- No busca simular un entorno real ofensivo, sino perder el miedo a las herramientas basicas del navegador.
 - El bloqueo por nivel se hace en servidor para evitar bypass simple por URL.
 - El progreso se guarda en cookie firmada para evitar manipulacion trivial.
+- La cookie `pista_nivel4` y la cabecera `X-Academia-Flag` son parte intencional del acertijo de esos niveles, no son datos sensibles reales.
 
 ## 6) Sugerencia para clase
 
-Secuencia recomendada:
+Secuencia recomendada (CTF cortito, pensado para una sesion de introduccion):
 
-1. Presentar historia y objetivo.
-2. Resolver nivel 1 en vivo.
-3. Dejar nivel 2 y 3 al grupo.
-4. Resolver nivel 4 en conjunto.
-5. Usar nivel 5 como cierre/competencia corta.
+1. Presentar la idea: "hoy vamos a perder el miedo a las herramientas del navegador".
+2. Resolver el nivel 1 en vivo, mostrando Ctrl+U.
+3. Dejar el nivel 2 al grupo (dar el tip de "nombres clasicos de carpetas ocultas" si se traban).
+4. Resolver el nivel 3 en conjunto, explicando que es Base64.
+5. Dejar los niveles 4 y 5 como cierre/competencia corta, mostrando antes, una sola vez, como se abre DevTools.
 
 Frase de inicio sugerida:
 
-Hoy no venimos solo a mirar una pagina web: venimos a pensar como analistas. En un CTF, cada detalle puede ser una pista, cada archivo puede hablar y cada error de observacion puede costarte una bandera.
+Hoy no venimos solo a mirar una pagina web: venimos a aprender a mirarla distinto. Todo lo que ves en un navegador tiene una capa que no se muestra a simple vista, y en ciberseguridad, aprender a mirar esa capa es el primer paso.

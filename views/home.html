@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini CTF Academia</title>
+  <title>CTF Introductorio - Academia de Ciberseguridad UCN</title>
   <link rel="stylesheet" href="/public/styles.css">
 </head>
 <body>
   <main class="container">
-    <h1>Mini CTF - Academia de Ciberseguridad</h1>
+    <h1>CTF Introductorio - Academia de Ciberseguridad UCN</h1>
 
     <div class="box">
-      <p>Sean muy bienvenidos a la nueva Academia de Ciberseguridad UCN.</p>
-      <p>En esta academia, explorarás diferentes niveles de ciberseguridad.</p>
-      <p>No todo lo importante esta a la vista.</p>
+      <p>Sean muy bienvenidos a la Academia de Ciberseguridad UCN.</p>
+      <p>Este es un CTF de 5 niveles pensado para dar tus primeros pasos: no necesitas saber programar ni haber usado herramientas de hacking antes.</p>
+      <p>En cada nivel te vamos a explicar, paso a paso, una tecnica basica que usan quienes trabajan en ciberseguridad: revisar el codigo fuente, explorar rutas, leer la consola del navegador, inspeccionar cookies y ver cabeceras HTTP.</p>
+      <p>No todo lo importante esta a la vista. Presta atencion a los detalles.</p>
       <p>Mucha suerte para todos y que empiece el juego!</p>
       <p>Comienza en: <a href="/nivel1/">/nivel1/</a></p>
     </div>
@@ -34,7 +35,7 @@
 
       const card = document.createElement('div');
       card.className = 'box';
-      card.innerHTML = '<h2>Mision completada</h2><p class="flag">ACADEMIA{ctf_completado}</p><p>Excelente trabajo. Ya puedes repetir el recorrido o usarlo en clase.</p>';
+      card.innerHTML = '<h2>Mision completada</h2><p class="flag">Completaste los 5 niveles del CTF introductorio.</p><p>Excelente trabajo. Ya puedes repetir el recorrido o usarlo en clase.</p>';
       document.querySelector('.container').appendChild(card);
     })();
   </script>

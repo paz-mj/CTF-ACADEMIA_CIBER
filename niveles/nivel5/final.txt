@@ -1,1 +1,0 @@
-Flag final: ACADEMIA{ctf_completado}

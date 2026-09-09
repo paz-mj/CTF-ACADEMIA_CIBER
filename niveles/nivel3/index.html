@@ -11,9 +11,16 @@
     <h1>Nivel 3: El codigo susurra</h1>
 
     <div class="box">
-      <p>No todos los mensajes vienen en lenguaje humano.</p>
-      <p class="clue">Pista visible: los desarrolladores suelen dejar rastros en sus scripts.</p>
-      <p class="mini-tip">Mini ayuda: abre la consola del navegador (F12) para ver mensajes.</p>
+      <p>Los navegadores traen "herramientas de desarrollador" pensadas para programadores, pero cualquiera puede abrirlas.</p>
+      <p>Una de esas herramientas es la <strong>consola</strong>: ahi los sitios web pueden escribir mensajes que normalmente nadie ve.</p>
+      <p class="clue">Pista visible: revisa la consola del navegador. Alguien dejo un mensaje ahi.</p>
+      <p class="mini-tip">
+        Mini ayuda, paso a paso:<br>
+        1) Presiona F12 (o clic derecho &gt; Inspeccionar).<br>
+        2) Busca la pestana llamada "Console" o "Consola".<br>
+        3) Recarga esta pagina y lee los mensajes que aparecen.<br>
+        4) Ese texto raro es <strong>Base64</strong>: una forma de escribir texto en otro formato, no es un cifrado secreto. Puedes decodificarlo escribiendo <code>atob('texto')</code> en esa misma consola, o usando un decodificador Base64 de internet.
+      </p>
       <script src="/nivel3/codigo.js"></script>
     </div>
 

@@ -7,11 +7,11 @@ const PORT = 3000;
 const SECRET = process.env.CTF_SECRET || 'academia-lab-local-2026';
 
 const FLAGS = {
-  1: 'ACADEMIA{miraste_mas_alla}',
+  1: 'ACADEMIA{el_codigo_fuente_no_miente}',
   2: 'ACADEMIA{las_rutas_tambien_hablan}',
   3: 'ACADEMIA{el_codigo_tambien_es_pista}',
-  4: 'ACADEMIA{une_fragmentos_y_gana}',
-  5: 'ACADEMIA{ctf_completado}'
+  4: 'ACADEMIA{las_cookies_guardan_secretos}',
+  5: 'ACADEMIA{la_respuesta_viaja_escondida}'
 };
 
 app.use(express.urlencoded({ extended: false }));
@@ -83,8 +83,17 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/nivel1', express.static(path.join(__dirname, 'niveles', 'nivel1')));
 app.use('/nivel2', requireLevel(2), express.static(path.join(__dirname, 'niveles', 'nivel2')));
 app.use('/nivel3', requireLevel(3), express.static(path.join(__dirname, 'niveles', 'nivel3')));
-app.use('/nivel4', requireLevel(4), express.static(path.join(__dirname, 'niveles', 'nivel4')));
-app.use('/nivel5', requireLevel(5), express.static(path.join(__dirname, 'niveles', 'nivel5')));
+
+app.get('/nivel4/', requireLevel(4), (req, res) => {
+  const pista = Buffer.from(FLAGS[4]).toString('base64');
+  res.setHeader('Set-Cookie', `pista_nivel4=${encodeURIComponent(pista)}; Path=/nivel4; SameSite=Lax`);
+  res.sendFile(path.join(__dirname, 'niveles', 'nivel4', 'index.html'));
+});
+
+app.get('/nivel5/', requireLevel(5), (req, res) => {
+  res.setHeader('X-Academia-Flag', FLAGS[5]);
+  res.sendFile(path.join(__dirname, 'niveles', 'nivel5', 'index.html'));
+});
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'home.html'));

@@ -8,17 +8,26 @@
 </head>
 <body>
   <main class="container">
-    <h1>Nivel 4: Nada llega completo</h1>
+    <h1>Nivel 4: Una galletita con secretos</h1>
 
     <div class="box">
-      <p>Fragmento 1: <span class="flag">ACADEMIA{une_</span></p>
-      <p class="clue">Pista visible: el resto esta en un recurso del mismo nivel.</p>
-      <p class="mini-tip">Mini ayuda: busca carpetas como /recursos/ dentro de este nivel.</p>
+      <p>Las <strong>cookies</strong> son pequenos datos que un sitio web guarda en tu navegador.</p>
+      <p>Sirven, por ejemplo, para recordar tu progreso en este mismo CTF, o para mantenerte con la sesion iniciada en otras paginas.</p>
+      <p>Cualquiera puede abrir las herramientas de desarrollador y revisar que cookies guarda un sitio.</p>
+      <p class="clue">Pista visible: este nivel te dejo una cookie propia. Su valor esta en Base64.</p>
+      <p class="mini-tip">
+        Mini ayuda, paso a paso:<br>
+        1) Presiona F12 para abrir las herramientas de desarrollador.<br>
+        2) Busca la pestana "Application" (Chrome/Edge) o "Almacenamiento" (Firefox).<br>
+        3) En el panel izquierdo, entra a "Cookies" y elige este sitio.<br>
+        4) Busca una cookie llamada <strong>pista_nivel4</strong> y copia su valor.<br>
+        5) Decodifica ese valor: en la pestana Console puedes escribir <code>atob('valor_copiado')</code>.
+      </p>
     </div>
 
     <div class="box">
       <h2>Validar flag y desbloquear</h2>
-      <p>Une los fragmentos y valida para abrir el nivel 5.</p>
+      <p>Cuando decodifiques la cookie, valida la flag para abrir el nivel 5.</p>
       <form class="unlock" method="POST" action="/validar">
         <input type="hidden" name="nivel" value="4">
         <label for="flag4">Flag del nivel 4</label>
@@ -29,7 +38,5 @@
 
     <p><a href="/">Volver al inicio</a></p>
   </main>
-
-  <!-- Ayuda extra: revisa /nivel4/recursos/fragmento.txt -->
 </body>
 </html>

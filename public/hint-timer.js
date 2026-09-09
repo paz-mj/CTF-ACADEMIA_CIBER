@@ -17,8 +17,7 @@
   }
 
   function revelarAyuda() {
-    hint.open = true;
-    hint.classList.add('mini-tip-auto');
+    hint.hidden = false;
   }
 
   var elapsed = Date.now() - start;

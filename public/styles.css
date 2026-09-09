@@ -81,48 +81,15 @@ a:hover {
 
 .mini-tip {
   margin-top: 12px;
-  border-left: 3px solid rgba(255, 209, 102, 0.8);
-  background: rgba(255, 209, 102, 0.08);
-  color: #ffe7a3;
-  border-radius: 0 8px 8px 0;
-}
-
-.mini-tip summary {
-  cursor: pointer;
   padding: 10px 12px;
-  font-weight: bold;
-  list-style: none;
-}
-
-.mini-tip summary::-webkit-details-marker {
-  display: none;
-}
-
-.mini-tip summary::before {
-  content: '▶ ';
-  color: var(--gold);
-}
-
-.mini-tip[open] summary::before {
-  content: '▼ ';
-}
-
-.mini-tip summary:hover {
-  color: var(--gold);
+  border-left: 3px solid var(--cyan);
+  background: rgba(50, 246, 255, 0.08);
+  color: #d8faff;
+  border-radius: 0 8px 8px 0;
 }
 
 .mini-tip p {
   margin: 0;
-  padding: 0 12px 12px;
-}
-
-.mini-tip-auto {
-  border-left-color: var(--cyan);
-  box-shadow: 0 0 0 1px rgba(50, 246, 255, 0.25);
-}
-
-.mini-tip-auto summary::before {
-  color: var(--cyan);
 }
 
 .ranking {

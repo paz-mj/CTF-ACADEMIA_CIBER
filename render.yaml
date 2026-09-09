@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: ctf-academia-ciber
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: CTF_SECRET
+        generateValue: true

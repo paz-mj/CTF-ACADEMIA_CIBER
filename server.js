@@ -3,7 +3,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const SECRET = process.env.CTF_SECRET || 'academia-lab-local-2026';
 
 const FLAGS = {
